@@ -1,21 +1,78 @@
-const API_URL = "https://localhost:7029/"
+const API_URL = "https://localhost:7029/api/"
 
-export const apiGet = (url, par) => {
-    const queryParams = new URLSearchParams(par);
-    const apiUrl = `${API_URL}${url}?${queryParams}`;
+export const apiGet = async (url, params = {}) => {
+    const queryParams = new URLSearchParams(params);
 
-    return fetch(apiUrl)
-        .then((response) => {
-            if (!response.ok){
-                throw new Error(`Odezva sítě nebyla v pořádku: ${response.status} ${response.statusText}`);
-            }
-            return response.json();
-        })
-        .then((data) => {
-            return data;
-        })
-        .catch((error) => {
-            throw error;
-        });
-        
+    const response = await fetch(
+        `${API_URL}${url}?${queryParams}`,
+        {
+            credentials: "include"
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error(`Odezva sítě nebyla v pořádku: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json();
+};
+
+export const apiPost = async (url, body) => {
+    const response = await fetch(
+        `${API_URL}${url}`,
+        {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(body)
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error (`Odezva sítě nebyla v pořádku: ${response.status} ${response.statusText}`);
+    }
+
+    return await response.json();
+};
+
+export const apiPatch = async (url, body) => {
+    const response = await fetch(
+        `${API_URL}${url}`,
+        {
+            method: "PATCH",
+            credentials: "include",
+            headers:{
+                "Content-Type": "application/json"
+            },
+            body:JSON.stringify(body)
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error (`Odezva sítě nebyla v pořádku: ${response.status} ${response.statusText}`);
+    }
+
+    if (response.status === 204){
+        return null;
+    }
+
+    return await response.json();
+}
+
+export const apiDelete = async (url) => {
+    const response = await fetch(
+        `${API_URL}${url}`,
+        {
+            method: "DELETE",
+            credentials: "include"
+        }
+    );
+
+    if (!response.ok) {
+        throw new Error(`Odezva sítě nebyla v pořádku: ${response.status} ${response.statusText}`);
+    }
+
+    return true;
 };
