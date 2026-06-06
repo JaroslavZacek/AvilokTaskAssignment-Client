@@ -2,12 +2,10 @@ import { useState } from 'react'
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
 
-function App() {
-  const [count, setCount] = useState(0)
+import AppRouter from './router/AppRouter'
 
-  return (
-    <h1>Ahoj světe</h1>
-  )
+function App() {
+  return <AppRouter />
 }
 
 export default App
