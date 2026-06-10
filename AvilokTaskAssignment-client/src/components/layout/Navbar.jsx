@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate, NavLink } from "react-router-dom";
 
 import { logout } from "../../api/authApi";
 import { useAuth } from "../auth/AuthContext";
@@ -35,18 +35,22 @@ export default function Navbar() {
     return (
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
             <div className="container-fluid">
-                <Link
+                {/* TODO: Nahradit text Avilok firemním logem*/}
+                <NavLink
                     className="navbar-brand"
                     to="/" 
                 >
                     Avilok
-                </Link>
+                </NavLink>
 
                 <button
                     className="navbar-toggler"
                     type="button"
                     data-bs-toggle="collapse"
                     data-bs-target="#navbarNav"
+                    aria-controls="navbarNav"
+                    aria-expanded="false"
+                    aria-label="Přepnout navigaci"
                 >
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -54,24 +58,29 @@ export default function Navbar() {
                 <div className="collapse navbar-collapse" id="navbarNav">
                     <ul className="navbar-nav">
                         <li className="nav-item">
-                            <Link
-                                className="nav-link"
+                            <NavLink
                                 to="/"
+                                end
+                                className={({ isActive }) =>
+                                    isActive? "nav-link active" : "nav-link"
+                                }
                             >
                                 Zakázky
-                            </Link>            
+                            </NavLink>            
                         </li>
 
                         {
                             isManagement &&
                             (
                                 <li className="nav-item">
-                                    <Link
-                                        className="nav-link"
+                                    <NavLink
                                         to="/users"
+                                        className={({ isActive}) =>
+                                            isActive? "nav-link active" : "nav-link"
+                                        }
                                     >
                                         Uživatelé
-                                    </Link>  
+                                    </NavLink>  
                                 </li>
                             )
                         }
