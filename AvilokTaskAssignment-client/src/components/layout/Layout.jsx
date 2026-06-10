@@ -8,11 +8,11 @@ export default function Layout({ children }) {
                 <Navbar />
             </header>
             
-            <main>
+            <main className="container mt-4">
                 {children}
             </main>
 
-            <footer>
+            <footer className="text-center text-muted py-3 border-top mt-5">
                 <p>Vytvořeno Jaroslav Žáček</p>
             </footer>
 

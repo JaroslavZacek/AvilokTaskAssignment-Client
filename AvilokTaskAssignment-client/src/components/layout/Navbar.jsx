@@ -33,29 +33,68 @@ export default function Navbar() {
     }
 
     return (
-        <nav>
-            <Link to="/">
-                Zakázky
-            </Link>
+        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div className="container-fluid">
+                <Link
+                    className="navbar-brand"
+                    to="/" 
+                >
+                    Avilok
+                </Link>
 
-            {
-                isManagement &&
-                (
-                    <>
-                        <Link to="/users">
-                            Uživatelé
-                        </Link>
-                    </>
-                )
-            }
+                <button
+                    className="navbar-toggler"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#navbarNav"
+                >
+                    <span className="navbar-toggler-icon"></span>
+                </button>
 
-            <span>
-                {user?.email}
-            </span>
+                <div className="collapse navbar-collapse" id="navbarNav">
+                    <ul className="navbar-nav">
+                        <li className="nav-item">
+                            <Link
+                                className="nav-link"
+                                to="/"
+                            >
+                                Zakázky
+                            </Link>            
+                        </li>
 
-            <button onClick={handleLogout}>
-                Odhlásit
-            </button>
+                        {
+                            isManagement &&
+                            (
+                                <li className="nav-item">
+                                    <Link
+                                        className="nav-link"
+                                        to="/users"
+                                    >
+                                        Uživatelé
+                                    </Link>  
+                                </li>
+                            )
+                        }
+                    </ul>
+
+                    <ul className="navbar-nav ms-auto">
+                        <li className="nav-item">
+                            <span className="navbar-text">
+                                {user?.email}
+                            </span>
+                        </li>
+
+                        <li className="nav-item ms-3">
+                            <button
+                                className="btn btn-outline-light btn-sm"
+                                onClick={handleLogout}
+                            >
+                                Odhlásit
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </nav>
     );
 }
