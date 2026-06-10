@@ -7,5 +7,8 @@ export const login = (email, password) =>
         rememberMe: true
     });
 
+export const logout = () => 
+    apiPost("auth/logout", {});
+
 export const getCurrentUser = () =>
     apiGet("auth/me")

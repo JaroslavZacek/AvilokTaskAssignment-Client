@@ -4,26 +4,49 @@ import TasksPage  from "../pages/TasksPage";
 import LoginPage from "../pages/LoginPage";
 import TaskDetailPage from "../pages/TaskDetailPage";
 import CreateTaskPage from "../pages/CreateTaskPage";
+
+import Layout from "../components/layout/Layout";
 import ProtectedRoute from "../utils/Auth/ProtectedRoute";
 
 export default function AppRouter() {
     return (
         <BrowserRouter>
             <Routes>
+                
+                <Route path="/login" element={<LoginPage />} />
+                
                 <Route 
                     path="/"
                     element={
                         <ProtectedRoute>
-                            <TasksPage />
+                            <Layout>
+                                <TasksPage />
+                            </Layout>
                         </ProtectedRoute>        
                     }
                 />
 
-                <Route path="/login" element={<LoginPage />} />
+                <Route 
+                    path="/tasks/create" 
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <CreateTaskPage />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
 
-                <Route path="/tasks/create" element={<CreateTaskPage />} />
-
-                <Route path="/task/:taskId" element={<TaskDetailPage />} />
+                <Route 
+                    path="/task/:taskId" 
+                    element={
+                        <ProtectedRoute>
+                            <Layout>
+                                <TaskDetailPage />
+                            </Layout>
+                        </ProtectedRoute>
+                    }
+                />
             </Routes>
         </BrowserRouter>
     );

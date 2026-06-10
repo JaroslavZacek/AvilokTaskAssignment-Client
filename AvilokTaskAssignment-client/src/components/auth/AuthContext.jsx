@@ -26,13 +26,18 @@ export function AuthProvider({ children }) {
         }
     }
 
+    function logoutUser() {
+        setUser(null);
+    }
+
     return (
         <AuthContext.Provider
             value={{
                 user,
                 loading,
                 isAuthenticated: user !== null,
-                reloadUser: loadUser
+                reloadUser: loadUser,
+                logoutUser
             }}
         >
             {children}
