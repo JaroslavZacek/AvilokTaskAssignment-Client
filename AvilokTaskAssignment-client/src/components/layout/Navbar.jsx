@@ -89,7 +89,7 @@ export default function Navbar() {
                     <ul className="navbar-nav ms-auto">
                         <li className="nav-item">
                             <span className="navbar-text">
-                                {user?.email}
+                                {user?.fullName}
                             </span>
                         </li>
 
