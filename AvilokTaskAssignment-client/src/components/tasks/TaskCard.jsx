@@ -10,7 +10,7 @@ export default function TaskCard({ task }) {
                 {" | "}
                 {task.status}
                 {" | "}
-                {task.deadline}
+                {new Date(task.deadline).toLocaleDateString("cs-CZ")}
             </p>
         </div>
     );

@@ -6,6 +6,7 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
 
     const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         loadUser();
@@ -14,10 +15,14 @@ export function AuthProvider({ children }) {
     async function loadUser() {
         try {
             const data = await getCurrentUser();
+
             setUser(data);
         }
-        catch {
+        catch (error) {
             setUser(null);
+        }
+        finally {
+            setLoading(false);
         }
     }
 
@@ -25,6 +30,7 @@ export function AuthProvider({ children }) {
         <AuthContext.Provider
             value={{
                 user,
+                loading,
                 isAuthenticated: user !== null,
                 reloadUser: loadUser
             }}
