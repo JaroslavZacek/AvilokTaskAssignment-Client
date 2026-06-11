@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 import { getTasks } from "../api/taskApi";
 import { getUsers } from "../api/userApi";
@@ -163,12 +164,24 @@ export default function TasksPage() {
                                 <button className="btn btn-outline-secondary ms-2" onClick={clearFilters}>
                                     Vymazat filtr
                                 </button>
+
+                                
                         </div>
                     </div>
                 </div>
             </div>
 
+            <div className="mt-3">
+                <Link to="tasks/create" className="btn btn-success">
+                    <i className="bi bi-plus-lg"></i>
+                    {" "}
+                    Nová zakázka
+                </Link>
+            </div>
+
             {
+
+                
                 Object.entries(WORK_TYPES).map(
                     ([workType, title]) => {
                         const filteredTasks = tasks.filter(t => t.workType === Number(workType));
