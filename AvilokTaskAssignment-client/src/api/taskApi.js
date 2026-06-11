@@ -13,7 +13,6 @@ export const createTask = async (task) =>{
     )
 }
 
-
 export const assignTask = (taskId) =>
     apiPatch(`tasks/${taskId}/assign`, {});
 
