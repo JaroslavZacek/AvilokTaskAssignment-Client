@@ -1,10 +1,23 @@
 const API_URL = "https://localhost:7029/api/"
 
 export const apiGet = async (url, params = {}) => {
-    const queryParams = new URLSearchParams(params);
+
+    const filteredParams = Object.fromEntries(
+        Object.entries(params).filter(
+            ([_, value]) => 
+                value !== undefined &&
+                value !== null &&
+                value !== ""
+        )
+    );
+
+    const queryParams = new URLSearchParams(filteredParams);
+
+    const apiUrl =
+        queryParams.toString() ? `${API_URL}${url}?${queryParams}` : `${API_URL}${url}`;
 
     const response = await fetch(
-        `${API_URL}${url}?${queryParams}`,
+        apiUrl,
         {
             credentials: "include"
         }
