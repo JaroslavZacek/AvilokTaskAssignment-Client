@@ -5,8 +5,11 @@ import LoginPage from "../pages/LoginPage";
 import TaskDetailPage from "../pages/TaskDetailPage";
 import CreateTaskPage from "../pages/CreateTaskPage";
 
+import UsersPage from "../pages/UsersPage";
+
 import Layout from "../components/layout/Layout";
 import ProtectedRoute from "../utils/Auth/ProtectedRoute";
+import ManagementRoute from "../utils/Auth/ManagementRoute";
 
 export default function AppRouter() {
     return (
@@ -46,6 +49,17 @@ export default function AppRouter() {
                             </Layout>
                         </ProtectedRoute>
                     }
+                />
+
+                <Route
+                    path="/users"
+                    element={
+                        <ManagementRoute>
+                            <Layout>
+                                <UsersPage />
+                            </Layout>
+                        </ManagementRoute>                      
+                    } 
                 />
             </Routes>
         </BrowserRouter>
