@@ -13,8 +13,8 @@ export const createTask = async (task) =>{
     )
 }
 
-export const assignTask = (taskId) =>
-    apiPatch(`tasks/${taskId}/assign`, {});
+export const assignTask = (taskId, assignedUserId) =>
+    apiPatch(`tasks/${taskId}/assign`, {assignedUserId});
 
 export const updateTaskStatus = (taskId, status) =>
     apiPatch(`tasks/${taskId}/status`, {status});
