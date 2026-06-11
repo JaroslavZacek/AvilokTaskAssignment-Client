@@ -1,7 +1,7 @@
 import { apiGet, apiPost, apiPatch, apiDelete } from "../utils/api";
 
-export const getTasks = () => 
-    apiGet("tasks");
+export const getTasks = (params = {}) => 
+    apiGet("tasks", params);
 
 export const getTaskDetail = (taskId) =>
     apiGet(`tasks/${taskId}`);
