@@ -74,12 +74,16 @@ export const apiPatch = async (url, body) => {
     return await response.json();
 }
 
-export const apiDelete = async (url) => {
+export const apiDelete = async (url, body) => {
     const response = await fetch(
         `${API_URL}${url}`,
         {
             method: "DELETE",
-            credentials: "include"
+            credentials: "include",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify(body)
         }
     );
 
@@ -87,5 +91,5 @@ export const apiDelete = async (url) => {
         throw new Error(`Odezva sítě nebyla v pořádku: ${response.status} ${response.statusText}`);
     }
 
-    return true;
+    return await response.json();
 };
