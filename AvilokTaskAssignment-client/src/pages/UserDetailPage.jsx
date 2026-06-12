@@ -31,7 +31,7 @@ export default function UserDetailPage() {
     return (
         <div className="container mt-4">
             <div className="card shadow-sm">
-                <div card-body>
+                <div className="card-body">
                     <h2 className="card-title mb-4">{user.fullName}</h2>
 
                     <div className="row">
