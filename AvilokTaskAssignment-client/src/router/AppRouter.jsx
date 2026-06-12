@@ -1,16 +1,20 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import TasksPage  from "../pages/TasksPage";
 import LoginPage from "../pages/LoginPage";
+import Layout from "../components/layout/Layout";
+
+import TasksPage  from "../pages/TasksPage";
 import TaskDetailPage from "../pages/TaskDetailPage";
 import CreateTaskPage from "../pages/CreateTaskPage";
 
 import UsersPage from "../pages/UsersPage";
+import UserDetailPage from "../pages/UserDetailPage";
+import CreateUserPage from "../pages/CreateUserPage";
 
-import Layout from "../components/layout/Layout";
 import ProtectedRoute from "../utils/Auth/ProtectedRoute";
 import ManagementRoute from "../utils/Auth/ManagementRoute";
-import CreateUserPage from "../pages/CreateUserPage";
+
+
 
 export default function AppRouter() {
     return (
@@ -71,6 +75,13 @@ export default function AppRouter() {
                                 <CreateUserPage />
                             </Layout>
                         </ManagementRoute>
+                    } 
+                />
+
+                <Route
+                    path="/users/:userId"
+                    element={
+                        <UserDetailPage />
                     } 
                 />
             </Routes>
