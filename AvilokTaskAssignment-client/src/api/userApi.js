@@ -1,4 +1,4 @@
-import { apiGet, apiPatch, apiPost } from "../utils/api";
+import { apiGet, apiPatch, apiPost, apiDelete} from "../utils/api";
 
 export const getUsers = () =>
     apiGet("users");
