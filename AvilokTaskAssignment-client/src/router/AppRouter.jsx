@@ -81,7 +81,11 @@ export default function AppRouter() {
                 <Route
                     path="/users/:userId"
                     element={
-                        <UserDetailPage />
+                        <ManagementRoute>
+                            <Layout>
+                                <UserDetailPage />
+                            </Layout>
+                        </ManagementRoute>
                     } 
                 />
             </Routes>
