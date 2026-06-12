@@ -25,8 +25,7 @@ export default function TaskDetailPage() {
 
         return (
             user.roles.includes(roleName) ||
-            user.roles.includes(`Leader ${roleName}`) ||
-            user.roles.includes("Admin")
+            user.roles.includes(`Leader ${roleName}`)
         );
     })
 
