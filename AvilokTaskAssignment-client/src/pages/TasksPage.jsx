@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
+import { useAuth} from "../components/auth/AuthContext";
+import { isManagement } from "../utils/Auth/isManagement";
+
 import { getTasks } from "../api/taskApi";
 import { getUsers } from "../api/userApi";
 
@@ -10,7 +13,7 @@ import { WORK_TYPES } from "../utils/Tasks/workTypes"
 import { TASK_STATUS } from "../utils/Tasks/taskStatus";
 
 export default function TasksPage() {
-    
+
     const [tasks, setTasks] = useState([]);
     const [users, setUsers] = useState([]);
 
@@ -18,6 +21,8 @@ export default function TasksPage() {
     const [statusFilter, setStatusFilter] = useState("");
     const [createdByFilter, setCreatedByFilter] = useState("");
     const [assignedUserFilter, setAssignedUserFilter] = useState("");
+
+    const { user } = useAuth();
 
     useEffect(() => {
         loadUsers();
@@ -171,13 +176,18 @@ export default function TasksPage() {
                 </div>
             </div>
 
-            <div className="mt-3">
-                <Link to="tasks/create" className="btn btn-success">
-                    <i className="bi bi-plus-lg"></i>
-                    {" "}
-                    Nová zakázka
-                </Link>
-            </div>
+            {
+                isManagement(user) &&
+                (
+                    <div className="mt-3">
+                        <Link to="tasks/create" className="btn btn-success">
+                            <i className="bi bi-plus-lg"></i>
+                            {" "}
+                            Nová zakázka
+                        </Link>
+                    </div>
+                )
+            }
 
             {
 
