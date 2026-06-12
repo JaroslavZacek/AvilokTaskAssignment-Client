@@ -6,6 +6,6 @@ export const getUsers = () =>
 
 export const createUser = async (user) =>
     await apiPost(
-        "/auth/register",
+        "auth/register",
         user
     )

@@ -129,7 +129,7 @@ export default function CreateUserPage() {
                                         type="suvmit"
                                         className="btn btn-success"
                                     >
-                                        Vytvořit uživatele
+                                        Registrovat
                                     </button>
 
                                     <button
