@@ -37,11 +37,11 @@ export default function AppRouter() {
                 <Route 
                     path="/tasks/create" 
                     element={
-                        <ProtectedRoute>
+                        <ManagementRoute>
                             <Layout>
                                 <CreateTaskPage />
                             </Layout>
-                        </ProtectedRoute>
+                        </ManagementRoute>
                     }
                 />
 
