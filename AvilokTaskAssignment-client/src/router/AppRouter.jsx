@@ -10,6 +10,7 @@ import UsersPage from "../pages/UsersPage";
 import Layout from "../components/layout/Layout";
 import ProtectedRoute from "../utils/Auth/ProtectedRoute";
 import ManagementRoute from "../utils/Auth/ManagementRoute";
+import CreateUserPage from "../pages/CreateUserPage";
 
 export default function AppRouter() {
     return (
@@ -59,6 +60,17 @@ export default function AppRouter() {
                                 <UsersPage />
                             </Layout>
                         </ManagementRoute>                      
+                    } 
+                />
+
+                <Route
+                    path="/users/create"
+                    element={
+                        <ManagementRoute>
+                            <Layout>
+                                <CreateUserPage />
+                            </Layout>
+                        </ManagementRoute>
                     } 
                 />
             </Routes>

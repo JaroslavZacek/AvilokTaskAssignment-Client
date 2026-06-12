@@ -23,7 +23,7 @@ export default function UsersPage() {
             <div className="d-flax justify-content-between align-items-center mb-4">
 
                 <Link
-                    to="/users/register"
+                    to="/users/create"
                     className="btn btn-success mb-2"
                 >
                     <i className="bi bi-plus-lg"></i>
