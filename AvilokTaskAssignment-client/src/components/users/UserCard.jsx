@@ -25,15 +25,15 @@ export default function UserCard({ user}) {
                         ))
                     }
                 </div>
-            </div>
 
-            <div className="card-footer bg-transparent border-0">
-                <Link
-                    to={`/user/${user.id}`}
-                    className="btn btn-outline-primary btn-sm"
-                >
-                    Detail
-                </Link>
+                <div className="card-footer bg-transparent border-0">
+                    <Link
+                        to={`/users/${user.id}`}
+                        className="btn btn-outline-primary btn-sm"
+                    >
+                        Detail
+                    </Link>
+                </div>
             </div>
         </div>
     );
