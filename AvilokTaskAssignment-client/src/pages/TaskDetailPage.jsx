@@ -3,13 +3,17 @@ import { useParams } from "react-router-dom";
 
 import { getTaskDetail , updateTaskStatus, assignTask} from "../api/taskApi";
 import { getUsers } from "../api/userApi";
+import { useAuth } from "../components/auth/AuthContext";
 
 import { WORK_TYPES} from "../utils/Tasks/workTypes";
 import { TASK_STATUS, getStatusClass} from "../utils/Tasks/taskStatus";
 import { ROLE_NAMES } from "../utils/Tasks/roleNames";
 
+import { isManagement } from "../utils/Auth/isManagement";
+
 export default function TaskDetailPage() {
     const { taskId } = useParams();
+    const { user } = useAuth();
 
     const [task, setTask] = useState(null);
     const [users, setUsers] = useState([]);
@@ -29,9 +33,18 @@ export default function TaskDetailPage() {
         );
     })
 
+    const canAssignTask =
+        task && 
+        (
+            user?.roles?.includes("Admin") ||
+            user?.roles?.includes(`Leader ${ROLE_NAMES[task.workType]}`)
+        )
+
     useEffect(() => {
         loadTask();
         loadUsers();
+        
+        
     }, []);
 
     async function loadTask() {
@@ -45,6 +58,7 @@ export default function TaskDetailPage() {
         setSelectedAssignedUser(data.assignedUserId ?? "");
     }
 
+    
     async function loadUsers() {
         const data = await getUsers();
 
@@ -144,17 +158,23 @@ export default function TaskDetailPage() {
                                                     {task.assignedUserName ?? "Nepřiřazeno"}
                                                 </div>
 
-                                                <button
-                                                    className="btn btn-outline-primary btn-sm mt-2"
-                                                    onClick={() => {
-                                                        setSelectedAssignedUser(
-                                                            task.assignedUserId ?? null
-                                                        );
-                                                        setIsEditingAssignedUser(true);
-                                                    }}
-                                                >
-                                                    Změnit
-                                                </button>
+                                                {
+                                                    canAssignTask &&
+                                                    (
+                                                        <button
+                                                            className="btn btn-outline-primary btn-sm mt-2"
+                                                            onClick={() => {
+                                                                setSelectedAssignedUser(
+                                                                    task.assignedUserId ?? null
+                                                                );
+                                                                setIsEditingAssignedUser(true);
+                                                            }}
+                                                        >
+                                                            Změnit
+                                                        </button>
+                                                    )
+                                                }
+                                                
                                             </>
                                         )
                                         : (
