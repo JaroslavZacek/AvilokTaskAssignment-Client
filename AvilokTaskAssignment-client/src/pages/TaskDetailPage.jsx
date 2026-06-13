@@ -14,6 +14,7 @@ import { TASK_STATUS, getStatusClass} from "../utils/Tasks/taskStatus";
 import { ROLE_NAMES } from "../utils/Tasks/roleNames";
 
 import { isManagement } from "../utils/Auth/isManagement";
+import { isTaskLeader } from "../utils/Auth/taskPermissions";
 
 export default function TaskDetailPage() {
     const { taskId } = useParams();
@@ -37,12 +38,7 @@ export default function TaskDetailPage() {
         );
     })
 
-    const canAssignTask =
-        task && 
-        (
-            user?.roles?.includes("Admin") ||
-            user?.roles?.includes(`Leader ${ROLE_NAMES[task.workType]}`)
-        )
+    const isLeader = isTaskLeader(user, task?.workType);
 
     useEffect(() => {
         loadTask();
@@ -161,7 +157,7 @@ export default function TaskDetailPage() {
                                                 </div>
 
                                                 {
-                                                    canAssignTask &&
+                                                    isLeader &&
                                                     (
                                                         <button
                                                             className="btn btn-outline-primary btn-sm mt-2"
