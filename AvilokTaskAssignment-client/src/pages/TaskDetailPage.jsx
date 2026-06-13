@@ -2,7 +2,11 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 
 import { getTaskDetail , updateTaskStatus, assignTask} from "../api/taskApi";
+
 import { getUsers } from "../api/userApi";
+
+import { getComments, createComment } from "../api/commentApi";
+
 import { useAuth } from "../components/auth/AuthContext";
 
 import { WORK_TYPES} from "../utils/Tasks/workTypes";
