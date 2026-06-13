@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 
 import { getComments, createComment } from "../../api/commentApi";
 
-export default function TaskComments({ taskId }) {
+export default function TaskComments({ taskId, isTaskLeader }) {
     
     const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState("");
@@ -73,20 +73,27 @@ export default function TaskComments({ taskId }) {
                 )
             }
 
-            <div className="mt-3">
+            {
+                isTaskLeader &&
+                (
+                    <div className="mt-3">
 
-                <textarea
-                    className="form-control"
-                    rows="3"
-                    value={newComment}
-                    onChange={(e) => setNewComment(e.target.value)}
-                    placeholder="Napsat komentář..." 
-                />
+                        <textarea
+                            className="form-control"
+                            rows="3"
+                            value={newComment}
+                            onChange={(e) => setNewComment(e.target.value)}
+                            placeholder="Napsat komentář..."
+                        />
 
-                <button className="btn btn-primary mt-2" onClick={handleAddComment}>
-                    Přidat komentář
-                </button>
-            </div>
+                        <button className="btn btn-primary mt-2" onClick={handleAddComment}>
+                            Přidat komentář
+                        </button>
+                    </div>
+                )
+            }
+
+            
         </div>
     );
 
