@@ -7,5 +7,5 @@ export const createComment = async (taskId, text) =>
     await apiPost(`tasks/${taskId}/comments`,{ text }
     );
 
-export const deleteComment = (commentId) =>
-    await apiDelete(`task/comments/${commentId}`);
+export const deleteComment = async (commentId) =>
+    await apiDelete(`tasks/comments/${commentId}`);
