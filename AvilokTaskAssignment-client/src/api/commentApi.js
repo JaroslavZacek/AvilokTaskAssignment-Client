@@ -6,3 +6,6 @@ export const getComments = async (taskId) =>
 export const createComment = async (taskId, text) =>
     await apiPost(`tasks/${taskId}/comments`,{ text }
     );
+
+export const deleteComment = (commentId) =>
+    await apiDelete(`task/comments/${commentId}`);
