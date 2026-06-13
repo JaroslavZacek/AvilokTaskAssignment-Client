@@ -1,5 +1,9 @@
 import { apiGet, apiPost, apiPatch, apiDelete } from "../utils/api";
 
+/*---------------------------------------------*/
+/*----------------Sekce zakázek----------------*/
+/*---------------------------------------------*/
+
 export const getTasks = (params = {}) => 
     apiGet("tasks", params);
 
@@ -21,3 +25,14 @@ export const updateTaskStatus = (taskId, status) =>
 
 export const deleteTask = (taskId) =>
     apiDelete(`tasks/${taskId}`);
+
+/*---------------------------------------------*/
+/*---------------Sekce komentářů---------------*/
+/*---------------------------------------------*/
+
+export const getComments = async (taskId) =>
+    await apiGet(`tasks/${taskId}/comments`);
+
+export const createComment = async (taskId, text) =>
+    await apiPost(`tasks/${taskId}/comments`,{ text }
+    );
