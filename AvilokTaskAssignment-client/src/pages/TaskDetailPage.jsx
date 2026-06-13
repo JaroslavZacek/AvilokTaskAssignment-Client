@@ -298,7 +298,7 @@ export default function TaskDetailPage() {
                     }
                 </div>
 
-                <TaskComments taskId={task.id}/>
+                <TaskComments taskId={task.id} isTaskLeader={isLeader}/>
             </div>
         </div>
     );
