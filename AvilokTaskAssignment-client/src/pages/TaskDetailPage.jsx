@@ -21,6 +21,8 @@ export default function TaskDetailPage() {
 
     const [task, setTask] = useState(null);
     const [users, setUsers] = useState([]);
+    const [comments, setComments] = useState([]);
+    const [newComment, setNewComment] = useState("");
 
     const [isEditingStatus, setIsEditingStatus] = useState(false);
     const [selectedStatus, setSelectedStatus] = useState(task?.status);
@@ -47,8 +49,7 @@ export default function TaskDetailPage() {
     useEffect(() => {
         loadTask();
         loadUsers();
-        
-        
+        loadComments();
     }, []);
 
     async function loadTask() {
@@ -67,6 +68,12 @@ export default function TaskDetailPage() {
         const data = await getUsers();
 
         setUsers(data);
+    }
+
+    async function loadComments() {
+        const data = await getComments(taskId);
+
+        setComments(data);
     }
 
     async function handleSaveStatus() {
@@ -113,6 +120,19 @@ export default function TaskDetailPage() {
         catch (error) {
             console.error(error);
         }
+    }
+
+    async function handleAddComment() {
+        
+        if (!newComment.trim()) {
+            return;
+        } 
+
+        await createComment(task.id, newComment);
+
+        setNewComment("");
+
+        await loadComments();
     }
 
     if (!task) {
