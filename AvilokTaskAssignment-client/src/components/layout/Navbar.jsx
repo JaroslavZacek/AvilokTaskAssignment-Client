@@ -1,7 +1,9 @@
 import { useNavigate, NavLink } from "react-router-dom";
 
 import { logout } from "../../api/authApi";
+
 import { useAuth } from "../auth/AuthContext";
+import { isManagement } from "../../utils/Auth/isManagement"
 
 export default function Navbar() {
 
@@ -11,12 +13,6 @@ export default function Navbar() {
         user,
         logoutUser
     } = useAuth();
-
-    const isManagement =
-        user?.roles?.includes("Admin") ||
-        user?.roles?.includes("Leader Developer") ||
-        user?.roles?.includes("Leader Graphic") ||
-        user?.roles?.includes("Leader Story");
 
     async function handleLogout() {
         try {
@@ -70,7 +66,7 @@ export default function Navbar() {
                         </li>
 
                         {
-                            isManagement &&
+                            isManagement(user) &&
                             (
                                 <li className="nav-item">
                                     <NavLink
